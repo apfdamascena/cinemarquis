@@ -13,14 +13,15 @@ class FeaturedView: UIView {
     var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.contentSize = CGSize(width: 410, height: 2000)
+        scroll.showsVerticalScrollIndicator = false
         return scroll
     }()
         
     var popularCollectionView: FeaturedCollectionView = {
         let collection = FeaturedCollectionView()
         let itemSize = CellSize(width: 200, height: 140)
-        let viewModel = FeaturedCollectionViewModel(identifier: "teste",
-                                                    cell: UICollectionViewCell.self,
+        let viewModel = FeaturedCollectionViewModel(identifier: PopularCollectionViewCell.identifier,
+                                                    cell: PopularCollectionViewCell.self,
                                                     cellSize: itemSize)
         collection.configure(with: viewModel)
         return collection

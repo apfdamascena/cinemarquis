@@ -9,39 +9,66 @@ import UIKit
 
 class PopularCollectionViewCell: UICollectionViewCell {
     
-    private let popularImage: UIImageView = {
+    static let identifier = "popular-collection-view-cell"
+    
+    var popularImage: UIImageView = {
         let image = UIImageView()
         return image
     }()
     
-    private let popularText: UILabel = {
-        let text = UILabel()
-        text.font = .systemFont(ofSize: 16, weight: .regular)
-        return text
+    var popularTitle: UILabel = {
+        let label = UILabel()
+        return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubviews()
+        setupContraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func addSubviews(){
         contentView.addSubview(popularImage)
-        contentView.addSubview(popularText)
-        contentView.backgroundColor = .blue
-        layoutSubviews()
+        contentView.addSubview(popularTitle)
     }
     
-    required init?(coder: NSCoder){
-        fatalError("init coder has not been implemented")
+    private func setupContraints(){
+        popularImageConstraints()
+        popularTitleConstraints()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        popularImage.frame = CGRect(x: 8, y: 0, width: 100, height: 140)
-        popularText.frame = CGRect(x:  8, y: popularImage.frame.maxY + 8, width: UIScreen.main.bounds.width, height: 40)
+    
+    func draw(_ movie: Movie) {
+        print(movie)
+        popularImage.image = UIImage(named: movie.backdrop)
+        popularTitle.text = movie.title
+    
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        popularImage.image = nil
-        popularText.text = ""
+}
+
+extension PopularCollectionViewCell {
+    
+    func popularImageConstraints(){
+        popularImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            popularImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            popularImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 4),
+            popularImage.widthAnchor.constraint(equalToConstant: contentView.frame.width - 8),
+            popularImage.heightAnchor.constraint(equalToConstant: 101)
+        ])
     }
     
+    func popularTitleConstraints(){
+        popularTitle.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            popularTitle.topAnchor.constraint(equalTo: popularImage.bottomAnchor, constant: 4),
+            popularTitle.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 4),
+            popularTitle.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+        ])
+    }
 }

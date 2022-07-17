@@ -39,7 +39,7 @@ class FeaturedCollectionView: UICollectionView {
         self.collectionViewLayout = layout
         self.showsHorizontalScrollIndicator = false
         
-        self.register(UICollectionViewCell.self, forCellWithReuseIdentifier: model.identifier)
+        self.register(model.cell, forCellWithReuseIdentifier: model.identifier)
         
     }
     
