@@ -9,17 +9,6 @@ import Foundation
 import UIKit
 
 
-enum CellType: String {
-    
-    case popular = "popular-cell"
-    case nowPlaying = "now-playing-cell"
-    case upcoming = "upcoming-cell"
-    
-    var type: CellType {
-        return self
-    }
-
-}
 
 protocol SectionHandler {
     

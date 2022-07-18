@@ -22,7 +22,9 @@ class TabBarViewController: UITabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.controllers = [
-            FeaturedViewController(sectionContainer: supportedPopularSections)
+            FeaturedViewController(sectionContainer: supportedPopularSections),
+            TrendingViewController(),
+            SearchViewController()
         ]
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -32,7 +34,9 @@ class TabBarViewController: UITabBarController {
     }
     
     let icons = [
-        ["film","film.fill"]
+        ["film","film.fill"],
+        ["flame", "flame.fill"],
+        ["magnifyingglass", "magnifyingglass.fill"]
     ]
     
     var navigationControllers: [UIViewController] = []

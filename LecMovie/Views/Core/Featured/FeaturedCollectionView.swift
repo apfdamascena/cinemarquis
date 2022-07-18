@@ -7,21 +7,8 @@
 
 import UIKit
 
-struct CellSize {
-    
-    let width: CGFloat
-    let height: CGFloat
-}
-
-struct FeaturedCollectionViewModel {
-    let identifier: String
-    let cell: UICollectionViewCell.Type
-    let cellSize: CellSize
-}
-
 class FeaturedCollectionView: UICollectionView {
-    
-    
+        
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
