@@ -16,6 +16,4 @@ struct Movie {
     let releaseDate: String
     let overview: String
     let genres: [String]
-    
-    var type: CellType
 }

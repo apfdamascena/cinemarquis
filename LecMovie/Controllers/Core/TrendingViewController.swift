@@ -13,6 +13,4 @@ class TrendingViewController: UIViewController {
         super.viewDidLoad()
         title = "Trending"
     }
-    
-
 }

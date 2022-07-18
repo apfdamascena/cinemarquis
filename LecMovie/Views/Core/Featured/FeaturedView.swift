@@ -10,6 +10,7 @@ import UIKit
 
 class FeaturedView: UIView {
     
+    
     var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.contentSize = CGSize(width: 410, height: 2000)
@@ -30,8 +31,8 @@ class FeaturedView: UIView {
     var nowPlayingCollectionView: FeaturedCollectionView = {
         let collection = FeaturedCollectionView()
         let itemSize = CellSize(width: 251, height: 114)
-        let viewModel = FeaturedCollectionViewModel(identifier: "teste2",
-                                                    cell: UICollectionViewCell.self,
+        let viewModel = FeaturedCollectionViewModel(identifier: NowPlayingCollectionViewCell.identifier,
+                                                    cell: NowPlayingCollectionViewCell.self,
                                                     cellSize: itemSize)
         collection.configure(with: viewModel)
         return collection
@@ -48,19 +49,19 @@ class FeaturedView: UIView {
     }()
     
     var popularLabel: TitleLabel = {
-        let label = TitleLabel.init()
+        let label = TitleLabel()
         label.configure(with: TitleLabelViewModel(title: "Popular"))
         return label
     }()
     
     var nowPlayingLabel: TitleLabel = {
-        let label = TitleLabel.init()
+        let label = TitleLabel()
         label.configure(with: TitleLabelViewModel(title: "Now Playing"))
         return label
     }()
     
       var upcomingLabel: TitleLabel = {
-         let label = TitleLabel.init()
+         let label = TitleLabel()
          label.configure(with: TitleLabelViewModel(title: "Upcoming"))
          return label
     }()
@@ -74,6 +75,7 @@ class FeaturedView: UIView {
         addSubviews()
         configureConstraints()
     }
+    
     
     private func addSubviews(){
         self.addSubview(scrollView)

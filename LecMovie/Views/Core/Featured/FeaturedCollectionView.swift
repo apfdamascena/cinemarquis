@@ -18,6 +18,8 @@ class FeaturedCollectionView: UICollectionView {
     }
 
     func configure(with model: FeaturedCollectionViewModel){
+        self.register(model.cell, forCellWithReuseIdentifier: model.identifier)
+        
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         layout.itemSize = CGSize(width: model.cellSize.width , height: model.cellSize.height)
@@ -25,9 +27,6 @@ class FeaturedCollectionView: UICollectionView {
     
         self.collectionViewLayout = layout
         self.showsHorizontalScrollIndicator = false
-        
-        self.register(model.cell, forCellWithReuseIdentifier: model.identifier)
-        
     }
     
 }

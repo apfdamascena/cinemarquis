@@ -9,7 +9,7 @@ import UIKit
 
 class PopularCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "popular-collection-view-cell"
+    static let identifier = "PopularCollectionViewCell"
     
     var popularImage: UIImageView = {
         let image = UIImageView()
@@ -43,7 +43,6 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     
     func draw(_ movie: Movie) {
-        print(movie)
         popularImage.image = UIImage(named: movie.backdrop)
         popularTitle.text = movie.title
     }

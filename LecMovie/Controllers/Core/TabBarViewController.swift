@@ -8,21 +8,12 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-    
-    let supportedPopularSections = SectionContainer(handlers: [ PopularSectionHandler() ])
-    
+        
     let controllers: [UIViewController]
-
-    init(){
-        self.controllers = [
-            FeaturedViewController(sectionContainer: supportedPopularSections)
-        ]
-        super.init()
-    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.controllers = [
-            FeaturedViewController(sectionContainer: supportedPopularSections),
+            FeaturedViewController(),
             TrendingViewController(),
             SearchViewController()
         ]
