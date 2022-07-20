@@ -13,8 +13,8 @@ extension FeaturedView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: leftAnchor),
-            scrollView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 16),
+            scrollView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
+            scrollView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
             scrollView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor)
         ])
     }
@@ -44,8 +44,18 @@ extension FeaturedView {
         NSLayoutConstraint.activate([
             nowPlayingLabel.topAnchor.constraint(equalTo: popularCollectionView.bottomAnchor, constant: 8),
             nowPlayingLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 8),
-            nowPlayingLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            nowPlayingLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -80),
             nowPlayingLabel.heightAnchor.constraint(equalToConstant: 31)
+        ])
+    }
+    
+    func seeAllNowPlayingButtonConstraints(){
+        seeAllNowPlayingButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            seeAllNowPlayingButton.topAnchor.constraint(equalTo: popularCollectionView.bottomAnchor, constant: 8),
+            seeAllNowPlayingButton.leftAnchor.constraint(equalTo: nowPlayingLabel.rightAnchor),
+            seeAllNowPlayingButton.widthAnchor.constraint(equalToConstant: 69),
+            seeAllNowPlayingButton.heightAnchor.constraint(equalToConstant: 42)
         ])
     }
     
@@ -64,8 +74,18 @@ extension FeaturedView {
         NSLayoutConstraint.activate([
             upcomingLabel.topAnchor.constraint(equalTo: nowPlayingCollectionView.bottomAnchor, constant: 16),
             upcomingLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 8),
-            upcomingLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            upcomingLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -80),
             upcomingLabel.heightAnchor.constraint(equalToConstant: 31)
+        ])
+    }
+    
+    func seeAllUpcomingButtonConstraints(){
+        seeAllUpcomingButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            seeAllUpcomingButton.topAnchor.constraint(equalTo: nowPlayingCollectionView.bottomAnchor, constant: 16),
+            seeAllUpcomingButton.leftAnchor.constraint(equalTo: upcomingLabel.rightAnchor),
+            seeAllUpcomingButton.widthAnchor.constraint(equalToConstant: 69),
+            seeAllUpcomingButton.heightAnchor.constraint(equalToConstant: 42)
         ])
     }
     

@@ -50,7 +50,7 @@ class NowPlayingCollectionViewCell: UICollectionViewCell {
     func draw(_ movie: Movie){
         nowPlayingImage.image = UIImage(named: movie.poster)
         nowPlayingTitle.text = movie.title
-        nowPlayingSubtitle.text = movie.releaseDate
+        nowPlayingSubtitle.text = DateHandler.shared.getYear(of: movie.releaseDate)
     }
     
     private func addSubviews(){

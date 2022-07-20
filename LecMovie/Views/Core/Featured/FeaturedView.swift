@@ -10,10 +10,11 @@ import UIKit
 
 class FeaturedView: UIView {
     
+    weak var delegate: FeaturedViewProtocol?
     
     var scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.contentSize = CGSize(width: 410, height: 2000)
+        scroll.contentSize = CGSize(width: 390, height: 1040)
         scroll.showsVerticalScrollIndicator = false
         return scroll
     }()
@@ -41,8 +42,8 @@ class FeaturedView: UIView {
     var upcommingCollectionView: FeaturedCollectionView = {
         let collection = FeaturedCollectionView()
         let itemSize = CellSize(width: 200, height: 299)
-        let viewModel = FeaturedCollectionViewModel(identifier: "teste3",
-                                                    cell: UICollectionViewCell.self,
+        let viewModel = FeaturedCollectionViewModel(identifier: UpcomingCollectionViewCell.identifier,
+                                                    cell: UpcomingCollectionViewCell.self,
                                                     cellSize: itemSize)
         collection.configure(with: viewModel)
         return collection
@@ -65,7 +66,18 @@ class FeaturedView: UIView {
          label.configure(with: TitleLabelViewModel(title: "Upcoming"))
          return label
     }()
-            
+    
+    var seeAllNowPlayingButton: SeeAll = {
+        let button  = SeeAll()
+        return button
+    }()
+    
+    var seeAllUpcomingButton: SeeAll = {
+        let button = SeeAll()
+        return button
+    }()
+    
+    
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
@@ -74,6 +86,20 @@ class FeaturedView: UIView {
         super.init(frame: frame)
         addSubviews()
         configureConstraints()
+        configureButtons()
+    }
+    
+    private func configureButtons(){
+        seeAllNowPlayingButton.addTarget(self, action: #selector(didTapSeeAllNowPlayingButton), for: .touchUpInside)
+        seeAllUpcomingButton.addTarget(self, action: #selector(didTapSeeAllUpcomingButton), for: .touchUpInside)
+    }
+    
+    @objc func didTapSeeAllNowPlayingButton(sender: UIButton) {
+        delegate?.showAllNowPlaying()
+    }
+    
+    @objc func didTapSeeAllUpcomingButton(sender: UIButton) {
+        delegate?.showAllUpcoming()
     }
     
     
@@ -85,15 +111,19 @@ class FeaturedView: UIView {
         scrollView.addSubview(nowPlayingCollectionView)
         scrollView.addSubview(upcomingLabel)
         scrollView.addSubview(upcommingCollectionView)
+        scrollView.addSubview(seeAllNowPlayingButton)
+        scrollView.addSubview(seeAllUpcomingButton)
     }
     
     private func configureConstraints(){
         scrollViewConstraints()
         popularLabelContraints()
         popularCollectionViewConstraints()
+        seeAllNowPlayingButtonConstraints()
         nowPlayingLabelConstraints()
         nowPlayingCollectionViewConstraints()
         upcomingLabelConstraints()
+        seeAllUpcomingButtonConstraints()
         upcommingCollectionViewConstraints()
     }
 }

@@ -25,39 +25,58 @@ class FeaturedViewController: UIViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Featured"
         self.view = featuredView
+        featuredView.delegate = self
         featuredView.nowPlayingCollectionView.dataSource = self
+        featuredView.nowPlayingCollectionView.delegate = self
         featuredView.popularCollectionView.dataSource = self
-
+        featuredView.popularCollectionView.delegate = self
+        featuredView.upcommingCollectionView.dataSource = self
+        featuredView.upcommingCollectionView.delegate = self
     }
 }
 
-extension FeaturedViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == featuredView.popularCollectionView {
-            return popularMovies.count
+extension FeaturedViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        var model: Movie
+        let index = indexPath.item
+        
+        if collectionView ==  featuredView.popularCollectionView {
+            model = popularMovies[index]
+        } else if collectionView == featuredView.nowPlayingCollectionView {
+            model = nowPlayingMovies[index]
+        } else {
+            model = upcomingMovies[index]
         }
-        return nowPlayingMovies.count
+        
+        let detailsViewController = DetailsViewController()
+        detailsViewController.movie = model
+        self.navigationController?.pushViewController(detailsViewController, animated: false)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == featuredView.popularCollectionView {
-            guard let cell = featuredView.popularCollectionView.dequeueReusableCell(withReuseIdentifier: PopularCollectionViewCell.identifier, for: indexPath) as? PopularCollectionViewCell else { return UICollectionViewCell() }
-            let movie = popularMovies[indexPath.item]
-            cell.draw(movie)
-            return cell
-        } else{
-            guard let cell = featuredView.nowPlayingCollectionView.dequeueReusableCell(withReuseIdentifier: NowPlayingCollectionViewCell.identifier, for: indexPath) as? NowPlayingCollectionViewCell else { return UICollectionViewCell() }
-            let movie = nowPlayingMovies[indexPath.row]
-            cell.draw(movie)
-            return cell
-        }
+}
+
+extension FeaturedViewController: FeaturedViewProtocol {
+    
+    func showAllNowPlaying() {
+        let seeAllViewController = SeeAllViewController()
+        seeAllViewController.seeAllTitle = "Now Playing"
+        seeAllViewController.movies = nowPlayingMovies
+        self.navigationController?.pushViewController(seeAllViewController, animated: false)
     }
     
+    func showAllUpcoming() {
+        let seeAllViewController = SeeAllViewController()
+        seeAllViewController.seeAllTitle = "Upcoming"
+        seeAllViewController.movies = upcomingMovies
+        self.navigationController?.pushViewController(seeAllViewController, animated: false)
+        
+    }
 }
 
 

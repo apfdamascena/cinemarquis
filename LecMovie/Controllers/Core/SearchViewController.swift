@@ -8,13 +8,9 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
-    override func viewDidLoad() {
+    
+    override func viewDidLoad(){
         super.viewDidLoad()
         title = "Search Movies"
-        
-
-        // Do any additional setup after loading the view.
     }
-
 }
