@@ -10,8 +10,8 @@ import UIKit
 class SeeAllViewController: UIViewController {
 
     var seeAllTitle: String?
-    var movies: [Movie]?
-    
+    var movies: [Movie] = []
+    var isNowPlaying: Bool?
     let seeAllView = SeeAllView()
     
     
@@ -19,13 +19,27 @@ class SeeAllViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         guard let seeAllTitle = seeAllTitle else { return }
-        guard let movies = movies else { return }
         
         title = seeAllTitle
         self.view = seeAllView
         seeAllView.tableView.dataSource = self
         seeAllView.tableView.delegate = self
-        self.movies = movies
+        
+        getAllData()
+    }
+    
+    func getAllData(){
+        guard let isNowPlaying = isNowPlaying else { return }
+        let route = isNowPlaying == true ? "/3/movie/now_playing" : "/3/movie/upcoming"
+        
+        Task {
+            let data = await APICaller.shared.makeRequest(with: Endpoint(path: route, queryItems: []),
+                                         expecting: MovieResponse.self)
+            if let movies = try? data.get() {
+                self.movies = movies.results
+                self.seeAllView.tableView.reloadData()
+            }
+        }
     }
 }
 
@@ -33,13 +47,11 @@ class SeeAllViewController: UIViewController {
 extension SeeAllViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let movies = movies else { return 0 }
         return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SeeAllTableViewCell.identifier, for: indexPath) as? SeeAllTableViewCell else { return UITableViewCell() }
-        guard let movies = movies else { return UITableViewCell() }
         let index = indexPath.row
         let movie = movies[index]
         cell.draw(movie)
@@ -50,7 +62,6 @@ extension SeeAllViewController: UITableViewDataSource {
 extension SeeAllViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let movies = movies else { return }
         let index = indexPath.item
         let movie = movies[index]
         let detailsViewController = DetailsViewController()

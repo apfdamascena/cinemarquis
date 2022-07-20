@@ -48,18 +48,28 @@ class DetailsViewController: UIViewController {
         addSubviews()
         setupContraints()
         
-        backdropImage.image = UIImage(named: movie.backdrop)
-        detailsDescription.imageContent.image = UIImage(named: movie.poster)
-        detailsDescription.durationLabel.text = "1h:30m"
-        detailsDescription.titleMovie.text = movie.title
-        detailsDescription.genreLabel.text = "tesstando testando"
-        detailsDescription.ratingLabel.text = "testandoo"
-        overviewText.text = movie.overview
+
         detailsDescription.delegate = self
+        
+        detailsDescription.draw(movie)
+        
+        setup()
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(touchInsideBackdrop))
         backdropImage.addGestureRecognizer(gesture)
         backdropImage.isUserInteractionEnabled = true
+    }
+    
+    private func setup(){
+        guard let movie = movie else { return }
+        
+        Task {
+            let data = await APICaller.downloadImageData(withPath: movie.backdropPath)
+            let image = UIImage(data: data)
+            backdropImage.image = image
+        }
+        
+        overviewText.text = movie.overview
     }
     
     

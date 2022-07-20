@@ -28,7 +28,8 @@ class DetailsDescription: UIView {
     
     var star: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .black
+        image.image = UIImage(systemName: "star.fill")
+        image.tintColor = .black
         return image
     }()
     
@@ -107,6 +108,19 @@ class DetailsDescription: UIView {
     
     @objc func touchUpInside(sender: UIButton) {
         delegate?.touchInImage()
+    }
+    
+    func draw(_ movie: Movie){
+        Task {
+            let data = await APICaller.downloadImageData(withPath: movie.posterPath)
+            let image = UIImage(data: data)
+            imageContent.image = image
+            
+        }
+        titleMovie.text = movie.title
+        ratingLabel.text = "Rating \(movie.voteAverage)/10"
+        genreLabel.text = "tesstando testando"
+        durationLabel.text = "1h:30m"
     }
 }
 

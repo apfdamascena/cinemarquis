@@ -82,12 +82,17 @@ class SeeAllTableViewCell: UITableViewCell {
     
     
     func draw(_ movie: Movie){
-        imageSeeAll.image = UIImage(named: movie.poster)
         titleSeeAll.text = movie.title
         star.image = UIImage(systemName: "star.fill")
         star.tintColor = .black
-        ratingLabel.text = "8.2"
+        ratingLabel.text = "\(movie.voteAverage)"
         dateLabel.text = movie.releaseDate
+        
+        Task {
+            let data = await APICaller.downloadImageData(withPath: movie.posterPath)
+            let image = UIImage(data: data)
+            imageSeeAll.image = image
+        }
     }
 
 }

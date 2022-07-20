@@ -68,7 +68,7 @@ class DescriptionTableViewCell: UITableViewCell {
     }
     
     func draw(_ movie: Movie){
-        imageDescription.image = UIImage(named: movie.poster)
+        imageDescription.image = UIImage(named: movie.posterPath)
         arrowRight.image = UIImage(systemName: "chevron.right")
         titleDescription.text = "Spider-Man"
         dateLabel.text = "2002"

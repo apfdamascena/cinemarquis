@@ -43,8 +43,13 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     
     func draw(_ movie: Movie) {
-        popularImage.image = UIImage(named: movie.backdrop)
         popularTitle.text = movie.title
+        
+        Task {
+            let data = await APICaller.downloadImageData(withPath: movie.posterPath)
+            let image = UIImage(data: data)
+            popularImage.image = image
+        }
     }
 }
 

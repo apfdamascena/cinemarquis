@@ -48,9 +48,14 @@ class NowPlayingCollectionViewCell: UICollectionViewCell {
     }
     
     func draw(_ movie: Movie){
-        nowPlayingImage.image = UIImage(named: movie.poster)
         nowPlayingTitle.text = movie.title
         nowPlayingSubtitle.text = DateHandler.shared.getYear(of: movie.releaseDate)
+        
+        Task {
+            let data = await APICaller.downloadImageData(withPath: movie.posterPath)
+            let image = UIImage(data: data)
+            nowPlayingImage.image = image
+        }
     }
     
     private func addSubviews(){

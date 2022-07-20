@@ -12,9 +12,9 @@ class FeaturedViewController: UIViewController {
     
     let featuredView = FeaturedView()
     
-    let popularMovies = Movie.popularMovies()
-    let nowPlayingMovies = Movie.nowPlayingMovies()
-    let upcomingMovies = Movie.upcomingMovies()
+    var popularMovies: [Movie] = []
+    var nowPlayingMovies: [Movie] = []
+    var upcomingMovies: [Movie] = []
     
     
     required init?(coder: NSCoder) {
@@ -36,6 +36,35 @@ class FeaturedViewController: UIViewController {
         featuredView.popularCollectionView.delegate = self
         featuredView.upcommingCollectionView.dataSource = self
         featuredView.upcommingCollectionView.delegate = self
+        
+        getAllData()
+    }
+    
+    private func getAllData(){
+        
+        Task {
+            let data = await APICaller.shared.makeRequest(with: Endpoint(path: "/3/movie/popular", queryItems: []),
+                                         expecting: MovieResponse.self)
+            guard let movies = try? data.get() else { return }
+            self.popularMovies = movies.results
+            self.featuredView.popularCollectionView.reloadData()
+        }
+        
+        Task {
+            let data = await APICaller.shared.makeRequest(with: Endpoint(path: "/3/movie/now_playing", queryItems: []),
+                                         expecting: MovieResponse.self)
+            guard let movies = try? data.get() else { return }
+            self.nowPlayingMovies = movies.results
+            self.featuredView.nowPlayingCollectionView.reloadData()
+        }
+        
+        Task {
+            let data = await APICaller.shared.makeRequest(with: Endpoint(path: "/3/movie/upcoming", queryItems: []),
+                                         expecting: MovieResponse.self)
+            guard let movies = try? data.get() else { return }
+            self.upcomingMovies = movies.results
+            self.featuredView.upcommingCollectionView.reloadData()
+        }
     }
 }
 
@@ -66,14 +95,14 @@ extension FeaturedViewController: FeaturedViewProtocol {
     func showAllNowPlaying() {
         let seeAllViewController = SeeAllViewController()
         seeAllViewController.seeAllTitle = "Now Playing"
-        seeAllViewController.movies = nowPlayingMovies
+        seeAllViewController.isNowPlaying = true
         self.navigationController?.pushViewController(seeAllViewController, animated: false)
     }
     
     func showAllUpcoming() {
         let seeAllViewController = SeeAllViewController()
         seeAllViewController.seeAllTitle = "Upcoming"
-        seeAllViewController.movies = upcomingMovies
+        seeAllViewController.isNowPlaying = false
         self.navigationController?.pushViewController(seeAllViewController, animated: false)
         
     }

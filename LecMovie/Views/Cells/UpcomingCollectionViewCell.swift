@@ -48,9 +48,15 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
     }
     
     func draw(_ movie: Movie){
-        upcomingImage.image = UIImage(named: movie.poster)
+        upcomingImage.image = UIImage(named: movie.posterPath)
         upcomingTitle.text = movie.title
         upcomingDate.text = DateHandler.shared.getYear(of: movie.releaseDate)
+        
+        Task {
+            let data = await APICaller.downloadImageData(withPath: movie.posterPath)
+            let image = UIImage(data: data)
+            upcomingImage.image = image
+        }
     }
     
     private func setupContraints(){

@@ -17,10 +17,11 @@ class ImageViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         title = "Official Poster"
-        
+                
         addSubviews()
         setupConstraints()
     }
+
     
     private func addSubviews(){
         view.addSubview(imagePoster)
@@ -37,6 +38,10 @@ class ImageViewController: UIViewController {
     }
     
     func configure(with movie: Movie){
-        imagePoster.image = UIImage(named: movie.poster)
+        Task {
+            let data = await APICaller.downloadImageData(withPath: movie.posterPath)
+            let image = UIImage(data: data)
+            imagePoster.image = image
+        }
     }
 }
