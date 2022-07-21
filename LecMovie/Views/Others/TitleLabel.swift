@@ -14,6 +14,7 @@ class TitleLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLabel()
+        self.textColor = UIColor(named: Constants.TEXT)
     }
     
     required init?(coder: NSCoder) {

@@ -18,6 +18,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     var popularTitle: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
@@ -25,6 +26,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubviews()
         setupContraints()
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
     
     required init?(coder: NSCoder) {

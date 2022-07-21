@@ -22,12 +22,10 @@ extension NowPlayingCollectionViewCell {
     
     func nowPlayingTitleConstraints(){
         nowPlayingTitle.translatesAutoresizingMaskIntoConstraints = false
-        let widthUsed = 12 + nowPlayingImage.frame.width + 16
-        let remaindedWidth = contentView.frame.width - widthUsed
         NSLayoutConstraint.activate([
             nowPlayingTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nowPlayingTitle.leftAnchor.constraint(equalTo: nowPlayingImage.rightAnchor, constant: 16),
-            nowPlayingTitle.widthAnchor.constraint(equalToConstant: remaindedWidth)
+            nowPlayingTitle.widthAnchor.constraint(equalToConstant: 170)
         ])
     }
     

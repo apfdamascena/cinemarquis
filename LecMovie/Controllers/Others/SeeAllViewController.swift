@@ -25,6 +25,8 @@ class SeeAllViewController: UIViewController {
         seeAllView.tableView.dataSource = self
         seeAllView.tableView.delegate = self
         
+        self.view.backgroundColor = UIColor(named: Constants.PRIMARY)
+        
         getAllData()
     }
     

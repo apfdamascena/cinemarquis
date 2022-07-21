@@ -15,6 +15,7 @@ class FeaturedCollectionView: UICollectionView {
     
     init(){
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
 
     func configure(with model: FeaturedCollectionViewModel){

@@ -57,7 +57,7 @@ class APICaller {
         
         var queryItems = [ URLQueryItem(name: Constants.API_KEY, value: APICaller.apiKey) ]
         queryItems.append(contentsOf: endpoint.queryItems)
-        
+                
         urlComponents.queryItems = queryItems
         
         guard let url = urlComponents.url else {

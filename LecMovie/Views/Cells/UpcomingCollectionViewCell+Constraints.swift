@@ -32,10 +32,10 @@ extension UpcomingCollectionViewCell {
     func upcomingDateConstraints(){
         upcomingDate.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            upcomingDate.topAnchor.constraint(equalTo: upcomingImage.bottomAnchor, constant: 8),
+            upcomingDate.topAnchor.constraint(equalTo: upcomingImage.bottomAnchor),
             upcomingDate.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             upcomingDate.widthAnchor.constraint(equalToConstant: 48),
-            upcomingDate.heightAnchor.constraint(equalToConstant: 38)
+            upcomingDate.heightAnchor.constraint(equalToConstant: 36)
         ])
     }
 }

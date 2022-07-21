@@ -26,6 +26,7 @@ class SeeAllTableViewCell: UITableViewCell {
     var titleSeeAll: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
@@ -36,18 +37,21 @@ class SeeAllTableViewCell: UITableViewCell {
     
     var star: UIImageView = {
         let view = UIImageView()
+        view.tintColor = UIColor(named: Constants.THIRD)
+        view.image = UIImage(systemName: "star.fill")
         return view
     }()
     
     var ratingLabel: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor(named: Constants.THIRD)
         return label
     }()
     
     var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor(named: "subtitle")
+        label.textColor = UIColor(named: Constants.SECONDARY)
         return label
     }()
     
@@ -55,6 +59,7 @@ class SeeAllTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         setupConstraints()
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
     
     required init?(coder: NSCoder) {
@@ -83,7 +88,6 @@ class SeeAllTableViewCell: UITableViewCell {
     
     func draw(_ movie: Movie){
         titleSeeAll.text = movie.title
-        star.image = UIImage(systemName: "star.fill")
         star.tintColor = .black
         ratingLabel.text = "\(movie.voteAverage)"
         dateLabel.text = movie.releaseDate

@@ -52,7 +52,7 @@ extension FeaturedView {
     func seeAllNowPlayingButtonConstraints(){
         seeAllNowPlayingButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            seeAllNowPlayingButton.topAnchor.constraint(equalTo: popularCollectionView.bottomAnchor, constant: 8),
+            seeAllNowPlayingButton.topAnchor.constraint(equalTo: popularCollectionView.bottomAnchor, constant: 4),
             seeAllNowPlayingButton.leftAnchor.constraint(equalTo: nowPlayingLabel.rightAnchor),
             seeAllNowPlayingButton.widthAnchor.constraint(equalToConstant: 69),
             seeAllNowPlayingButton.heightAnchor.constraint(equalToConstant: 42)
@@ -82,7 +82,7 @@ extension FeaturedView {
     func seeAllUpcomingButtonConstraints(){
         seeAllUpcomingButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            seeAllUpcomingButton.topAnchor.constraint(equalTo: nowPlayingCollectionView.bottomAnchor, constant: 16),
+            seeAllUpcomingButton.topAnchor.constraint(equalTo: nowPlayingCollectionView.bottomAnchor, constant: 12),
             seeAllUpcomingButton.leftAnchor.constraint(equalTo: upcomingLabel.rightAnchor),
             seeAllUpcomingButton.widthAnchor.constraint(equalToConstant: 69),
             seeAllUpcomingButton.heightAnchor.constraint(equalToConstant: 42)

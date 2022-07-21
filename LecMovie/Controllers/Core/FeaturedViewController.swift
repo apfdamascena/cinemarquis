@@ -28,6 +28,7 @@ class FeaturedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Featured"
+        
         self.view = featuredView
         featuredView.delegate = self
         featuredView.nowPlayingCollectionView.dataSource = self
@@ -37,9 +38,17 @@ class FeaturedViewController: UIViewController {
         featuredView.upcommingCollectionView.dataSource = self
         featuredView.upcommingCollectionView.delegate = self
         
+        setupColors()
         getAllData()
+        
     }
     
+    private func setupColors(){
+        navigationController?.navigationBar.barTintColor = UIColor(named: Constants.PRIMARY)
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: Constants.TEXT) ?? .black]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: Constants.TEXT) ?? .black]
+    }
+
     private func getAllData(){
         
         Task {

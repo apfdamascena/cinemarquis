@@ -10,6 +10,7 @@ import UIKit
 class DescriptionTableViewCell: UITableViewCell {
     
     static let trendingIdentifier = "TredingTableViewCell"
+    static let searchIdentifier = "SearchTableViewCell"
     
     var imageDescription: UIImageView = {
         let image = UIImageView()
@@ -20,19 +21,20 @@ class DescriptionTableViewCell: UITableViewCell {
     var titleDescription: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
     var arrowRight: UIImageView = {
         let view = UIImageView()
-        view.tintColor = .black
+        view.tintColor = UIColor(named: Constants.THIRD)
         return view
     }()
     
     var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor(named: "subtitle")
+        label.textColor = UIColor(named: Constants.SECONDARY)
         return label
     }()
     
@@ -49,6 +51,7 @@ class DescriptionTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         addSubviews()
         setupConstraints()
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
     
     private func addSubviews(){
@@ -67,11 +70,37 @@ class DescriptionTableViewCell: UITableViewCell {
         arrowRightConstraints()
     }
     
-    func draw(_ movie: Movie){
-        imageDescription.image = UIImage(named: movie.posterPath)
+    func draw(_ movie: TrendingMovie){
+        imageDescription.image = UIImage()
         arrowRight.image = UIImage(systemName: "chevron.right")
-        titleDescription.text = "Spider-Man"
-        dateLabel.text = "2002"
+        titleDescription.text = movie.title
+        dateLabel.text = DateHandler.shared.getYear(of: movie.releaseDate)
+        
+        guard let path = movie.posterPath else { return }
+        
+        Task {
+            let data = await APICaller.downloadImageData(withPath: path)
+            let image = UIImage(data: data)
+            imageDescription.image = image
+        }
+    }
+    
+    func draw(_ movie: SearchMovie){
+        arrowRight.image = UIImage(systemName: "chevron.right")
+        titleDescription.text = movie.name
+        dateLabel.text = ""
+        
+        Task {
+            
+            let data = await APICaller.shared.makeRequest(with: Endpoint(path: "/3/movie/\(movie.id)", queryItems: []),
+                                         expecting: DetailsMovie.self)
+            guard let movie = try? data.get() else { return }
+            guard let path = movie.posterPath else { return }
+            
+            let dataImage = await APICaller.downloadImageData(withPath: path)
+            let image = UIImage(data: dataImage)
+            imageDescription.image = image
+        }
     }
 }
 

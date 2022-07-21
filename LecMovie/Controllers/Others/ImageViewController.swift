@@ -17,9 +17,18 @@ class ImageViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         title = "Official Poster"
+
                 
         addSubviews()
         setupConstraints()
+        setupColors()
+    }
+    
+    private func setupColors(){
+        self.view.backgroundColor = UIColor(named: Constants.PRIMARY)
+        navigationController?.navigationBar.barTintColor = UIColor(named: Constants.PRIMARY)
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: Constants.TEXT) ?? .black]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: Constants.TEXT) ?? .black]
     }
 
     

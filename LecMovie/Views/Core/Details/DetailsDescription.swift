@@ -12,7 +12,7 @@ class DetailsDescription: UIView {
     var titleMovie: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
-        label.textColor = .black
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
@@ -29,13 +29,14 @@ class DetailsDescription: UIView {
     var star: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "star.fill")
-        image.tintColor = .black
+        image.tintColor = UIColor(named: Constants.THIRD)
         return image
     }()
     
     var ratingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
@@ -50,6 +51,7 @@ class DetailsDescription: UIView {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
@@ -57,12 +59,13 @@ class DetailsDescription: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .right
+        label.textColor = UIColor(named: Constants.SECONDARY)
         return label
     }()
     
     var borderBottom: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(named: Constants.THIRD)
         return view
     }()
     

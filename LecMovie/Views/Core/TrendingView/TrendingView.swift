@@ -9,9 +9,11 @@ import UIKit
 
 class TrendingView: UIView {
     
-    struct Constants {
+    struct ConstantsTrending {
         static let cellHeight: CGFloat = 114
     }
+    
+    weak var delegate: TrendingViewProtocol?
     
     var segmentedControl: UISegmentedControl = {
         let segmented = UISegmentedControl(items: ["Today", "This Week"])
@@ -20,7 +22,7 @@ class TrendingView: UIView {
     
     var tableView: UITableView = {
         let table = UITableView()
-        table.rowHeight = Constants.cellHeight
+        table.rowHeight = ConstantsTrending.cellHeight
         table.showsVerticalScrollIndicator = false
         return table
     }()
@@ -36,10 +38,12 @@ class TrendingView: UIView {
         segmentedControl.addTarget(self,
                                    action: #selector(didTapSegmentedControl(_:)),
                                    for: .valueChanged)
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
     
     @objc func didTapSegmentedControl(_ sender: UISegmentedControl){
-        print("oi")
+        let timeWindow = sender.selectedSegmentIndex == 0 ? "day" : "week"
+        delegate?.updateData(with: timeWindow)
     }
     
     private func addSubviews(){

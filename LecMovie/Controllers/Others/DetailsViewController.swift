@@ -25,6 +25,7 @@ class DetailsViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.text = "Overview"
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
@@ -35,6 +36,7 @@ class DetailsViewController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
         label.sizeToFit()
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
@@ -54,6 +56,7 @@ class DetailsViewController: UIViewController {
         detailsDescription.draw(movie)
         
         setup()
+        self.view.backgroundColor = UIColor(named: Constants.PRIMARY)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(touchInsideBackdrop))
         backdropImage.addGestureRecognizer(gesture)

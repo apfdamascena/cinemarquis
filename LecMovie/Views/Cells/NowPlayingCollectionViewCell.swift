@@ -21,19 +21,20 @@ class NowPlayingCollectionViewCell: UICollectionViewCell {
        label.lineBreakMode = .byWordWrapping
        label.numberOfLines = 2
        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = UIColor(named: Constants.SUBTEXT)
        return label
     }()
     
     var nowPlayingSubtitle: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(named: "subtitle")
+        label.textColor = UIColor(named: Constants.SECONDARY)
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return label
     }()
     
     var borderBottom: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(named: Constants.SUBTEXT)
         return view
     }()
     
@@ -41,7 +42,9 @@ class NowPlayingCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubviews()
         setupContraints()
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

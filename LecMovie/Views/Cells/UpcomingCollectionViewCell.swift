@@ -20,14 +20,14 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
     var upcomingTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor(named: "upcomingTitle")
+        label.textColor = UIColor(named: Constants.SUBTEXT)
         return label
     }()
     
     var upcomingDate: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor(named: "subtitle")
+        label.textColor = UIColor(named: Constants.SECONDARY)
         return label
     }()
     
@@ -35,6 +35,7 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubviews()
         setupContraints()
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
     
     required init?(coder: NSCoder) {

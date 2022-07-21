@@ -36,12 +36,14 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupViewControllers()
+        setupBar()
     }
     
     private func setupViewControllers(){
         controllers.enumerated().forEach{ (index, viewController) in
             viewController.navigationItem.largeTitleDisplayMode = .always
             let navigationController = UINavigationController(rootViewController: viewController)
+
             navigationController.navigationBar.prefersLargeTitles = true
             navigationController.tabBarItem =  UITabBarItem(title: viewController.title,
                                                             image: UIImage(systemName: icons[index][0]),
@@ -50,5 +52,10 @@ class TabBarViewController: UITabBarController {
             setViewControllers(navigationControllers, animated: true)
         }
     }
+    
+    private func setupBar(){
+        self.tabBar.barTintColor = UIColor(named: Constants.PRIMARY)
+    }
+    
 
 }

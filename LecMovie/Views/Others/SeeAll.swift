@@ -21,7 +21,7 @@ class SeeAll: UIButton {
     
     private func setupButton(){
         self.setTitle("See all", for: .normal)
-        self.setTitleColor(.red, for: .normal)
+        self.setTitleColor(UIColor(named: Constants.THIRD), for: .normal)
     }
 }
 

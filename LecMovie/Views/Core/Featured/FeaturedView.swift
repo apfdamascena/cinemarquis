@@ -11,7 +11,7 @@ import UIKit
 class FeaturedView: UIView {
     
     weak var delegate: FeaturedViewProtocol?
-    
+        
     var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.contentSize = CGSize(width: 390, height: 1040)
@@ -84,9 +84,14 @@ class FeaturedView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViewColors()
         addSubviews()
         configureConstraints()
         configureButtons()
+    }
+    
+    private func setupViewColors(){
+        self.backgroundColor = UIColor(named: Constants.PRIMARY)
     }
     
     private func configureButtons(){

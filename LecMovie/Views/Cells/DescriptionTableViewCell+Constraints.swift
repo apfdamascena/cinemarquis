@@ -24,7 +24,7 @@ extension DescriptionTableViewCell {
         NSLayoutConstraint.activate([
             titleDescription.topAnchor.constraint(equalTo: imageDescription.topAnchor),
             titleDescription.leftAnchor.constraint(equalTo: imageDescription.rightAnchor, constant: 8),
-            titleDescription.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+            titleDescription.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -50),
             titleDescription.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
